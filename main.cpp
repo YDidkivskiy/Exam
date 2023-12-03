@@ -5,15 +5,13 @@
 const int row = 22, col = 2;
 int matrix[col][row];
 
-void sort(int matrix[col][row], int startIndex, int colIndex) {
-    for (int i = 0; i < row - 1; ++i) {
-        int index = startIndex;
-
-        for (int j = startIndex + 1; j < row; ++j) {
-            if (matrix[j][colIndex] > matrix[index][colIndex])
-                index = j;
+void sort(int matrix[col][row], int rowIndex) {
+    for (int i = 0; i < col - 1; ++i) {
+        for (int j = i + 1; j < col; ++j) {
+            if (matrix[i][rowIndex] < matrix[j][rowIndex]) {
+                std::swap(matrix[i][rowIndex], matrix[j][rowIndex]);
+            }
         }
-        std::swap(matrix[startIndex][i], matrix[index][i]);
     }
 }
 
@@ -53,12 +51,11 @@ int main() {
 
     std::cout << std::endl;
 
-    std::cout << "Відсортована матриця" << std::endl;
     for (int i = 0; i < row; ++i) {
-        sort(matrix, i, 0);
+        sort(matrix, i);
     }
 
-
+    std::cout << "Відсортована матриця за спаданням" << std::endl;
     for (int i = 0; i < row; ++i) {
         for (int j = 0; j < col; ++j) {
             std::cout << matrix[j][i] << " ";
